@@ -43,3 +43,8 @@ namespace :offline do
     # build the offline jobs and move them to offline/build folder
   end
 end
+
+desc "Run task after deploy"
+task :after_deploy do
+  # Add code here to run after deploy
+end
