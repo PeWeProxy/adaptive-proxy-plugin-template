@@ -1,0 +1,18 @@
+require 'fileutils'
+require 'rubygems'
+require 'rake'
+
+desc "coppy external .jar files into adaptive-proxy-root/libs"
+task :copy do
+  target = "../../../libs/"
+#  FileUtils.mkdir(target) unless File.exist?(target)
+
+  FileList['**/*.jar'].each do |source|
+    file_name = File.basename(source)
+    target_dir = target + File.new(source).path.sub(file_name, '')
+    makedirs target_dir
+    cp_r source, target_dir + file_name, :verbose => true    
+  end
+end
+
+task :default => ["copy"]
