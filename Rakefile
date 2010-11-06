@@ -127,11 +127,6 @@ namespace :after do
   desc "Run task after deploy"
   task :after_deploy do
     # Add code here to run after deploy
-
-    Dir.chdir('after') do
-      `ruby bin/update_filters`
-			FileUtils.cp("filter.txt", ENV['PROXY_ROOT'])
-    end
   end
 end
 
