@@ -136,7 +136,7 @@ namespace :createMigration do
 
   task :createFile do
         date = Time.now
-        wholeName = "#{date.year}-#{date.month-1}-#{date.day}_#{date.hour}-#{date.min}_#{NAME}"
+        wholeName = date.strftime("%Y%m%d%H%M%S" + "_" + NAME)
 	file = File.new("#{wholeName}", "w+")
 
         file.puts("class #{CLASS_NAME} < ActiveRecord::Migration")
