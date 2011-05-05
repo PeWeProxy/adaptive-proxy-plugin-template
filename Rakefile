@@ -7,6 +7,7 @@ require 'whenever'
 require 'yaml'
 require 'rake'
 require 'logger'
+require 'date'
 
 PROXY_DIR = 'adaptive-proxy'
 
@@ -126,6 +127,25 @@ namespace :migrations do
     ActiveRecord::Base.establish_connection(YAML::load(File.open('migrations/database.yml'))[ENV["RAILS_ENV"] ? ENV["RAILS_ENV"] : "development"])
     ActiveRecord::Base.logger = Logger.new(File.open('migrations/database.log', 'a'))
   end
+end
+
+NAME = "meno_migracie.rb"
+CLASS_NAME = "meno triedy"
+
+namespace :createMigration do
+
+  task :createFile do
+        date = Time.now
+        wholeName = "#{date.year}-#{date.month-1}-#{date.day}_#{date.hour}-#{date.min}_#{NAME}"
+	file = File.new("#{wholeName}", "w+")
+
+        file.puts("class #{CLASS_NAME} < ActiveRecord::Migration")
+        file.puts("  def")
+        file.puts("")
+        file.puts("  end")
+        file.puts("end")
+  end
+  
 end
 
 namespace :after do
